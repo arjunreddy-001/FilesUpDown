@@ -1,0 +1,64 @@
+<p-table
+  [value]="files"
+  styleClass="p-datatable-gridlines p-datatable-striped"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>File Name</th>
+      <th>Unique Name</th>
+      <th>Content Type</th>
+      <th>Description</th>
+      <th>Date Added</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-file>
+    <tr>
+      <td>{{ file.actualName }}</td>
+      <td>{{ file.uniqueName }}</td>
+      <td>{{ file.contentType }}</td>
+      <td>{{ file.description }}</td>
+      <td>{{ file.dateAdded }}</td>
+      <td class="actions">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-eye"
+          iconPos="left"
+          class="p-button-raised p-button-rounded p-button-outlined p-button-info"
+          (click)="showDialog(file)"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          icon="pi pi-download"
+          iconPos="left"
+          class="p-button-raised p-button-rounded p-button-outlined p-button-success"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          icon="pi pi-file-edit"
+          iconPos="left"
+          class="p-button-raised p-button-rounded p-button-outlined p-button-secondary"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          icon="pi pi-trash"
+          iconPos="left"
+          class="p-button-raised p-button-rounded p-button-outlined p-button-danger"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog [header]="dialog.title" [(visible)]="dialog.display" [modal]="true">
+  <img [src]="dialog.src" [alt]="dialog.alt" style="max-width: 400px" />
+  <div>{{ dialog.description }}</div>
+</p-dialog>
