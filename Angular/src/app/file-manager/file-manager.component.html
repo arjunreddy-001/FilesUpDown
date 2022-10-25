@@ -1,64 +1,99 @@
-<p-table
-  [value]="files"
-  styleClass="p-datatable-gridlines p-datatable-striped"
-  responsiveLayout="scroll"
->
-  <ng-template pTemplate="header">
-    <tr>
-      <th>File Name</th>
-      <th>Unique Name</th>
-      <th>Content Type</th>
-      <th>Description</th>
-      <th>Date Added</th>
-      <th>Actions</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-file>
-    <tr>
-      <td>{{ file.actualName }}</td>
-      <td>{{ file.uniqueName }}</td>
-      <td>{{ file.contentType }}</td>
-      <td>{{ file.description }}</td>
-      <td>{{ file.dateAdded }}</td>
-      <td class="actions">
-        <button
-          pButton
-          type="button"
-          icon="pi pi-eye"
-          iconPos="left"
-          class="p-button-raised p-button-rounded p-button-outlined p-button-info"
-          (click)="showDialog(file)"
-        ></button>
+<div class="container">
+  <div class="row">
+    <h1 class="heading">File Manager</h1>
+    <p-button label="Upload" icon="pi pi-plus"></p-button>
+  </div>
 
-        <button
-          pButton
-          type="button"
-          icon="pi pi-download"
-          iconPos="left"
-          class="p-button-raised p-button-rounded p-button-outlined p-button-success"
-        ></button>
+  <p-table
+    [value]="files"
+    styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>File Name</th>
+        <th>Unique Name</th>
+        <th>Content Type</th>
+        <th>Description</th>
+        <th>Alt Text</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-file>
+      <tr>
+        <td>{{ file.actualName }}</td>
+        <td>{{ file.uniqueName }}</td>
+        <td>{{ file.contentType }}</td>
+        <td>{{ file.description }}</td>
+        <td>{{ file.altText }}</td>
+        <td>{{ file.dateAdded }}</td>
+        <td class="actions">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-eye"
+            iconPos="left"
+            class="p-button-raised p-button-rounded p-button-outlined p-button-info"
+            (click)="showViewImageDialog(file)"
+            pTooltip="View Image"
+            tooltipPosition="top"
+          ></button>
 
-        <button
-          pButton
-          type="button"
-          icon="pi pi-file-edit"
-          iconPos="left"
-          class="p-button-raised p-button-rounded p-button-outlined p-button-secondary"
-        ></button>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-download"
+            iconPos="left"
+            class="p-button-raised p-button-rounded p-button-outlined p-button-success"
+            pTooltip="Download File"
+            tooltipPosition="top"
+            (click)="downloadFile(file)"
+          ></button>
 
-        <button
-          pButton
-          type="button"
-          icon="pi pi-trash"
-          iconPos="left"
-          class="p-button-raised p-button-rounded p-button-outlined p-button-danger"
-        ></button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-file-edit"
+            iconPos="left"
+            class="p-button-raised p-button-rounded p-button-outlined p-button-secondary"
+            pTooltip="Edit Details"
+            tooltipPosition="top"
+          ></button>
 
-<p-dialog [header]="dialog.title" [(visible)]="dialog.display" [modal]="true">
-  <img [src]="dialog.src" [alt]="dialog.alt" style="max-width: 400px" />
-  <div>{{ dialog.description }}</div>
-</p-dialog>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            iconPos="left"
+            class="p-button-raised p-button-rounded p-button-outlined p-button-danger"
+            pTooltip="Delete File"
+            tooltipPosition="top"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    [header]="dialog.title"
+    [(visible)]="dialog.display"
+    [modal]="true"
+    [maximizable]="true"
+    (onMaximize)="onViewImageMaximize($event)"
+    (onHide)="resetViewImageDialog()"
+  >
+    <div class="dialog-content">
+      <img
+        [src]="dialog.src"
+        [alt]="dialog.alt"
+        [style]="
+          dialog.maximized
+            ? 'max-width: 100%; max-height: 100%;'
+            : 'max-width: 50vw; max-height: 70vh;'
+        "
+      />
+      <div>{{ dialog.description }}</div>
+    </div>
+  </p-dialog>
+</div>
