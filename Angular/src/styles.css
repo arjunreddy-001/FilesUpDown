@@ -12,3 +12,19 @@ body {
 .container {
   padding-inline: 2rem;
 }
+
+.p-dialog-content {
+  padding: 0 1rem 1rem 1rem !important;
+}
+
+.p-dialog-header {
+  padding: 1rem !important;
+}
+
+.edit-dialog-img {
+  max-height: 300px !important;
+  max-width: 100%;
+  width: auto !important;
+  margin: 0 auto !important;
+  display: block !important;
+}

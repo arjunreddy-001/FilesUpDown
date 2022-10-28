@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MessageService } from 'primeng/api';
+import { EditFileDetailsComponent } from '../edit-file-details/edit-file-details.component';
 
 @Component({
   selector: 'file-manager',
@@ -62,6 +63,8 @@ export class FileManagerComponent implements OnInit {
     this.fileManagerSvc.onUploadSuccess.subscribe((fileName) => {
       ref.close();
 
+      this.messageService.clear();
+
       this.messageService.add({
         severity: 'success',
         summary: 'Uploaded Successfully',
@@ -69,6 +72,29 @@ export class FileManagerComponent implements OnInit {
       });
 
       this.getAllFiles();
+    });
+  }
+
+  showEditFileDetailsDialog(file: any) {
+    const ref = this.dialogService.open(EditFileDetailsComponent, {
+      header: 'Edit File Details',
+      width: '30%',
+      data: {
+        f: file,
+      },
+    });
+
+    this.fileManagerSvc.onUpdateSuccess.subscribe((file: File) => {
+      ref.close();
+
+      this.messageService.clear();
+
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Updated Successfully',
+      });
+
+      this.updateFileRecord(file);
     });
   }
 
@@ -106,5 +132,12 @@ export class FileManagerComponent implements OnInit {
       // const url = window.URL.createObjectURL(blob);
       // window.open(url);
     });
+  }
+
+  updateFileRecord(file: File) {
+    let exitingFileRecord = this.files.find((f) => f.id === file.id);
+
+    exitingFileRecord.description = file.description;
+    exitingFileRecord.altText = file.altText;
   }
 }

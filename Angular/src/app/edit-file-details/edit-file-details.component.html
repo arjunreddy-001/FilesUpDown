@@ -1,0 +1,37 @@
+<p-image
+  [src]="file.path"
+  [alt]="file.altText"
+  imageClass="edit-dialog-img"
+></p-image>
+
+<div [formGroup]="form">
+  <input
+    type="text"
+    class="p-inputtext-sm"
+    placeholder="Description"
+    pInputText
+    formControlName="description"
+  />
+  <input
+    type="text"
+    class="p-inputtext-sm"
+    placeholder="Alt Text"
+    pInputText
+    formControlName="altText"
+  />
+
+  <div class="action-buttons">
+    <p-button
+      label="Reset"
+      icon="pi pi-refresh"
+      styleClass="p-button-sm p-button-secondary"
+      (onClick)="resetForm()"
+    ></p-button>
+    <p-button
+      label="Save"
+      icon="pi pi-save"
+      styleClass="p-button-sm "
+      (onClick)="saveUpdatedFileDetails()"
+    ></p-button>
+  </div>
+</div>

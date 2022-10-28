@@ -114,5 +114,18 @@ namespace Web_API.Services
             _context.Files.Add(record);
             _context.SaveChanges();
         }
+
+        public Files UpdateFileMeta(FileEditModel request)
+        {
+            Files file = GetFile(request.id);
+
+            file.Description = request.description;
+            file.AltText = request.altText;
+
+            _context.Files.Update(file);
+            _context.SaveChanges();
+
+            return file;
+        }
     }
 }

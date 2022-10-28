@@ -18,5 +18,7 @@ namespace Web_API.Services
         Files GetFile(int id);
 
         String GetFilePath(int id);
+
+        Files UpdateFileMeta(FileEditModel request);
     }
 }

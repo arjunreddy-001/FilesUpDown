@@ -15,6 +15,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ImageUploadModule } from './image-upload/image-upload.module';
 import { ToastModule } from 'primeng/toast';
+import { EditFileDetailsModule } from './edit-file-details/edit-file-details.module';
 
 @NgModule({
   declarations: [AppComponent, FileManagerComponent],
@@ -29,8 +30,9 @@ import { ToastModule } from 'primeng/toast';
     MenubarModule,
     TooltipModule,
     DynamicDialogModule,
-    ImageUploadModule,
     ToastModule,
+    ImageUploadModule,
+    EditFileDetailsModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -48,6 +48,12 @@ namespace Web_API.Controllers
             }
         }
 
+        [HttpPost("update")]
+        public Files UpdateFileMeta(FileEditModel request)
+        {
+            return _fileService.UpdateFileMeta(request);
+        }
+
         [HttpGet]
         public List<Files> GetAllFiles()
         {

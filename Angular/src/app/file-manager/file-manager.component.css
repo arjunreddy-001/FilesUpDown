@@ -30,3 +30,7 @@ tr {
   height: 1.75rem;
   width: 1.75rem;
 }
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  text-shadow: 0 0 black;
+}

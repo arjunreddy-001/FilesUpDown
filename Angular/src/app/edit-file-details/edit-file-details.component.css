@@ -1,0 +1,12 @@
+input {
+  display: block;
+  margin-block: 0.75rem;
+  width: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+

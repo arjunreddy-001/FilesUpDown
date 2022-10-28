@@ -1,11 +1,3 @@
-::ng-deep .p-dialog-content {
-  padding: 0 1.5rem 1rem 1.5rem !important;
-}
-
-::ng-deep .p-dialog-header {
-  padding: 1rem 1.5rem !important;
-}
-
 ::ng-deep .p-fileupload-buttonbar {
   display: flex;
   justify-content: center;

@@ -12,6 +12,7 @@ export class FileManagerService {
   endPoint = environment.apiUrl + '/api/File';
 
   onUploadSuccess = new EventEmitter();
+  onUpdateSuccess = new EventEmitter();
 
   getFiles() {
     return this.http.get<File[]>(this.endPoint);
@@ -27,5 +28,9 @@ export class FileManagerService {
     return this.http.get(this.endPoint + `/download/${id}`, {
       responseType: 'blob',
     });
+  }
+
+  updateFileDetails(data) {
+    return this.http.post(this.endPoint + '/update', data);
   }
 }
