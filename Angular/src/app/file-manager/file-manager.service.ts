@@ -31,6 +31,10 @@ export class FileManagerService {
   }
 
   updateFileDetails(data) {
-    return this.http.post(this.endPoint + '/update', data);
+    return this.http.put(this.endPoint, data);
+  }
+
+  deleteFile(id: number) {
+    return this.http.delete(`${this.endPoint}/${id}`);
   }
 }

@@ -106,6 +106,19 @@ namespace Web_API.Services
             return file;
         }
 
+        private bool DeleteFileFromPhysicalPath(Files file)
+        {
+            try
+            {
+                File.Delete(Path.Combine(_appDirectory, file.UniqueName + file.Extension));
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
         private void SaveToDB(Files record)
         {
             if (record == null)
@@ -126,6 +139,22 @@ namespace Web_API.Services
             _context.SaveChanges();
 
             return file;
+        }
+
+        public bool DeleteFile(int id)
+        {
+            Files file = GetFile(id);
+
+            bool isFileDeleted = DeleteFileFromPhysicalPath(file);
+
+            if(isFileDeleted)
+            {
+                _context.Files.Remove(file);
+                _context.SaveChanges();
+                return true;
+            } 
+
+            return false;
         }
     }
 }

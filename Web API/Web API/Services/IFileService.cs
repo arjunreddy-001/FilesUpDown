@@ -20,5 +20,7 @@ namespace Web_API.Services
         String GetFilePath(int id);
 
         Files UpdateFileMeta(FileEditModel request);
+
+        bool DeleteFile(int id);
     }
 }

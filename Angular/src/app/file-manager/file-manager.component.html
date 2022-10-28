@@ -1,4 +1,5 @@
 <p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
 
 <div class="container">
   <div class="row">
@@ -14,6 +15,11 @@
     [value]="files"
     styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
     responsiveLayout="scroll"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -76,6 +82,7 @@
             class="p-button-raised p-button-rounded p-button-outlined p-button-danger"
             pTooltip="Delete File"
             tooltipPosition="top"
+            (click)="confirmDelete($event, file.id)"
           ></button>
         </td>
       </tr>

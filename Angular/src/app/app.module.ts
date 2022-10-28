@@ -16,6 +16,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ImageUploadModule } from './image-upload/image-upload.module';
 import { ToastModule } from 'primeng/toast';
 import { EditFileDetailsModule } from './edit-file-details/edit-file-details.module';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [AppComponent, FileManagerComponent],
@@ -33,6 +34,7 @@ import { EditFileDetailsModule } from './edit-file-details/edit-file-details.mod
     ToastModule,
     ImageUploadModule,
     EditFileDetailsModule,
+    ConfirmPopupModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -48,7 +48,7 @@ namespace Web_API.Controllers
             }
         }
 
-        [HttpPost("update")]
+        [HttpPut]
         public Files UpdateFileMeta(FileEditModel request)
         {
             return _fileService.UpdateFileMeta(request);
@@ -83,6 +83,12 @@ namespace Web_API.Controllers
             var fileName = Path.GetFileName(filePath);
 
             return File(memory, contentType, fileName);
+        }
+
+        [HttpDelete("{id}")]
+        public bool DeleteFile(int id)
+        {
+            return _fileService.DeleteFile(id);
         }
     }
 }

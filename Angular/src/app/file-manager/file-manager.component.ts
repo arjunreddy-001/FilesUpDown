@@ -5,14 +5,14 @@ import { FileManagerService } from './file-manager.service';
 import { saveAs } from 'file-saver';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { EditFileDetailsComponent } from '../edit-file-details/edit-file-details.component';
 
 @Component({
   selector: 'file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.css'],
-  providers: [DialogService, MessageService],
+  providers: [DialogService, MessageService, ConfirmationService],
 })
 export class FileManagerComponent implements OnInit {
   files!: File[];
@@ -29,7 +29,8 @@ export class FileManagerComponent implements OnInit {
   constructor(
     private fileManagerSvc: FileManagerService,
     public dialogService: DialogService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -139,5 +140,24 @@ export class FileManagerComponent implements OnInit {
 
     exitingFileRecord.description = file.description;
     exitingFileRecord.altText = file.altText;
+  }
+
+  confirmDelete(event: any, fileId: number) {
+    this.confirmationService.confirm({
+      target: event.target,
+      message: 'Are you sure that you want to delete?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.fileManagerSvc.deleteFile(fileId).subscribe(() => {
+          this.files = this.files.filter((f) => f.id !== fileId);
+
+          this.messageService.clear();
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Delete Successful',
+          });
+        });
+      },
+    });
   }
 }
