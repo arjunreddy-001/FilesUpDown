@@ -1,7 +1,13 @@
+<p-toast></p-toast>
+
 <div class="container">
   <div class="row">
     <h1 class="heading">File Manager</h1>
-    <p-button label="Upload" icon="pi pi-plus"></p-button>
+    <p-button
+      label="Upload"
+      icon="pi pi-plus"
+      (click)="showImageUploadDialog()"
+    ></p-button>
   </div>
 
   <p-table

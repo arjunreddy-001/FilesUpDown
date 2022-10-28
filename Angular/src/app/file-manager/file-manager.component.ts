@@ -3,11 +3,15 @@ import { environment } from 'src/environments/environment';
 import { File } from 'src/models/file';
 import { FileManagerService } from './file-manager.service';
 import { saveAs } from 'file-saver';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.css'],
+  providers: [DialogService, MessageService],
 })
 export class FileManagerComponent implements OnInit {
   files!: File[];
@@ -21,9 +25,17 @@ export class FileManagerComponent implements OnInit {
     maximized: false,
   };
 
-  constructor(private fileManagerSvc: FileManagerService) {}
+  constructor(
+    private fileManagerSvc: FileManagerService,
+    public dialogService: DialogService,
+    public messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
+    this.getAllFiles();
+  }
+
+  getAllFiles() {
     this.fileManagerSvc.getFiles().subscribe((res) => {
       res.map((file) => {
         file.dateAdded = new Date(file.dateAdded).toDateString();
@@ -41,7 +53,24 @@ export class FileManagerComponent implements OnInit {
     this.dialog.display = true;
   }
 
-  showImageUploadDialog() {}
+  showImageUploadDialog() {
+    const ref = this.dialogService.open(ImageUploadComponent, {
+      header: 'Select File',
+      width: '50%',
+    });
+
+    this.fileManagerSvc.onUploadSuccess.subscribe((fileName) => {
+      ref.close();
+
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Uploaded Successfully',
+        detail: 'File name: ' + fileName,
+      });
+
+      this.getAllFiles();
+    });
+  }
 
   onViewImageMaximize(event: any) {
     this.dialog.maximized = event.maximized;

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { File } from 'src/models/file';
 
@@ -10,6 +10,8 @@ export class FileManagerService {
   constructor(private http: HttpClient) {}
 
   endPoint = environment.apiUrl + '/api/File';
+
+  onUploadSuccess = new EventEmitter();
 
   getFiles() {
     return this.http.get<File[]>(this.endPoint);

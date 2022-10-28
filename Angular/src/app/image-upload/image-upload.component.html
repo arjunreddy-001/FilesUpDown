@@ -1,0 +1,50 @@
+<p-fileUpload
+  name="myfile[]"
+  [customUpload]="true"
+  (uploadHandler)="uploadHandler()"
+  (onSelect)="onFilesSelection($event)"
+  (onClear)="onClearFilesSelection()"
+  [multiple]="false"
+  accept="image/*"
+>
+  <ng-template pTemplate="content" let-files>
+    <div
+      style="text-align: center; margin-top: 2rem"
+      *ngIf="selectedFiles.length === 0"
+    >
+      No file selected.
+    </div>
+  </ng-template>
+
+  <ng-template
+    [formGroup]="form"
+    let-i="index"
+    let-file
+    pTemplate="selectedFiles"
+  >
+    <div class="image-card">
+      <img [src]="file.objectURL" style="max-width: 150px" />
+      <div class="image-info">
+        <div>
+          <b>{{ file.name }}</b> - {{ file.size }} bytes
+        </div>
+
+        <input
+          type="text"
+          class="p-inputtext-sm"
+          pInputText
+          placeholder="Description"
+          [formControl]="file.fg.controls.description"
+        />
+
+        <input
+          type="text"
+          class="p-inputtext-sm"
+          pInputText
+          placeholder="Alt Text"
+          [formControl]="file.fg.controls.altText"
+        />
+      </div>
+    </div>
+  </ng-template>
+</p-fileUpload>

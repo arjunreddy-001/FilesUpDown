@@ -1,0 +1,38 @@
+::ng-deep .p-dialog-content {
+  padding: 0 1.5rem 1rem 1.5rem !important;
+}
+
+::ng-deep .p-dialog-header {
+  padding: 1rem 1.5rem !important;
+}
+
+::ng-deep .p-fileupload-buttonbar {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem !important;
+}
+
+::ng-deep .p-fileupload-content {
+  padding: 1rem !important;
+  min-height: 130px;
+}
+
+.image-card {
+  display: flex;
+  align-items: center;
+}
+
+.image-card:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.image-info {
+  margin-left: 1rem;
+  width: 100%;
+}
+
+input {
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+}
